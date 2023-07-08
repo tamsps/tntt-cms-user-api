@@ -26,7 +26,7 @@ namespace TNTT.UserApi.Data
             get;
             set;
         }
-        public DbSet<Profile> Profile
+        public DbSet<Users> Profile
         {
             get;
             set;
@@ -55,7 +55,7 @@ namespace TNTT.UserApi.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Profile>()
+            builder.Entity<Users>()
                 .HasIndex(u => u.PIN)
                 .IsUnique();
         }
