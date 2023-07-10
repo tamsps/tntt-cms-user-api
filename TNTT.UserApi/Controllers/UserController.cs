@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace TNTT.UserApi.Controllers
 {
@@ -16,6 +17,7 @@ namespace TNTT.UserApi.Controllers
         [Route("api/v1/user/get-all")]
         public IEnumerable<WeatherForecast> Get()
         {
+            Log.Information("Call function get all user");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

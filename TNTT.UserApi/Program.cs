@@ -1,5 +1,15 @@
+using Azure;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System;
 using TNTT.UserApi.Data;
+using Serilog;
+using Serilog.Formatting.Json;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File(new JsonFormatter(), "Logs/log.log", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,9 +27,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-
-
+Log.Information("Starting web host");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,5 +42,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
 
 app.Run();
